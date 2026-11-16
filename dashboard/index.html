@@ -1,15 +1,107 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Token Radar: pre-token protocols ranked by implied value</title>
-<link rel="stylesheet" href="app.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Token Launch Radar</title>
+  <link rel="stylesheet" href="app.css">
 </head>
 <body>
-<a class="skip" href="#board">Skip to the board</a>
-<main id="board" tabindex="-1" aria-busy="true"></main>
-<script src="../data.js"></script>
-<script src="app.js"></script>
+  <div class="layout">
+    <header class="header">
+      <div class="header-inner">
+        <div class="brand">
+          <div class="logo-mark">TR</div>
+          <div class="brand-text">
+            <h1>Token Launch Radar</h1>
+            <p class="tagline">Institutional valuation model and actionable airdrop farming intelligence</p>
+          </div>
+        </div>
+        <div class="metrics-bar">
+          <div class="metric-card">
+            <span class="metric-label">Protocols Scored</span>
+            <span class="metric-val" id="metric-total">200</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Watchlist Coverage</span>
+            <span class="metric-val highlight-green" id="metric-watchlist">40 / 40</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Total Implied FDV</span>
+            <span class="metric-val highlight-gold" id="metric-fdv">$0</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Apex Tier Opportunities</span>
+            <span class="metric-val" id="metric-apex">20</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="controls-panel">
+        <div class="tier-nav">
+          <button class="tier-tab active" data-tier="all">All Tiers</button>
+          <button class="tier-tab" data-tier="Apex">Apex (Top 20)</button>
+          <button class="tier-tab" data-tier="High">High (21-60)</button>
+          <button class="tier-tab" data-tier="Mid">Mid (61-120)</button>
+          <button class="tier-tab" data-tier="Early">Early (121-200)</button>
+        </div>
+
+        <div class="filter-row">
+          <div class="search-box">
+            <input type="text" id="search-input" placeholder="Search protocol, slug, or ecosystem..." autocomplete="off">
+          </div>
+          <div class="select-group">
+            <select id="filter-category" class="filter-select">
+              <option value="all">All Categories</option>
+            </select>
+            <select id="filter-chain" class="filter-select">
+              <option value="all">All Chains</option>
+            </select>
+            <select id="sort-by" class="filter-select">
+              <option value="rank">Sort by Rank</option>
+              <option value="implied_value_usd">Sort by Implied Value</option>
+              <option value="tvl_usd">Sort by TVL</option>
+              <option value="change_7d">Sort by 7D Growth</option>
+              <option value="name">Sort by Name</option>
+            </select>
+          </div>
+        </div>
+        <div class="results-bar">
+          <span id="results-count">Loading protocols...</span>
+        </div>
+      </section>
+
+      <section class="table-container">
+        <table class="radar-table">
+          <thead>
+            <tr>
+              <th class="col-rank">Rank</th>
+              <th class="col-name">Protocol</th>
+              <th class="col-tier">Tier</th>
+              <th class="col-cat">Category</th>
+              <th class="col-val">Implied Value</th>
+              <th class="col-tvl">Reported TVL</th>
+              <th class="col-growth">7D Change</th>
+              <th class="col-act">Farming Plan</th>
+            </tr>
+          </thead>
+          <tbody id="radar-tbody">
+            <!-- Rendered dynamically by app.js -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <aside id="detail-drawer" class="drawer hidden" aria-modal="true" role="dialog">
+      <div id="drawer-content" class="drawer-inner">
+        <!-- Rendered dynamically on protocol click -->
+      </div>
+    </aside>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
